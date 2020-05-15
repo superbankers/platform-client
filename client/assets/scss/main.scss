@@ -1,0 +1,28 @@
+@import './variables';
+
+@import './common/common-header.scss';
+@import './common/common-footer.scss';
+@import './example/example.scss';
+
+body {
+  font-size: 16px;
+  font-family: $font-quicksand;
+  margin: 0 auto;
+
+  text-align: center;
+  color: white;
+  // background: url($image-path + 'sample.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* CLICKABLES */
+[role="button"],
+button,
+input,
+label,
+a,
+select {
+  cursor: pointer;
+  outline: none;
+}
