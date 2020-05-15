@@ -10,7 +10,7 @@ body {
   margin: 0 auto;
 
   text-align: center;
-  color: white;
+  color: black;
   // background: url($image-path + 'sample.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,4 +25,8 @@ a,
 select {
   cursor: pointer;
   outline: none;
+}
+
+.home {
+
 }
