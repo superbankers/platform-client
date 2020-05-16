@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -12,6 +12,10 @@ import Profile from './game/profile'
 /* eslint-disable */
 
 const Main = (props) => {
+	const { user, stocks, profile, loans, events } = props.state.main;
+	useEffect(() => {
+    
+  }, []);
 	const [page, setPage] = useState("profile")
 	console.log(props)
 	return (
@@ -20,6 +24,9 @@ const Main = (props) => {
 			<div className="home-body">
 				<div className="home-body-game">
 					<div className="home-body-game-nav">
+						<img className="home-body-game-nav-pic" src={user.pic} />
+						<div>Balance: {profile.bank_balance}</div>
+						<div className="home-body-game-nav-name">{user.username}</div>
 						<div
 							className="home-body-game-nav-link"
 							onClick={() => setPage("profile")}
@@ -54,7 +61,7 @@ const Main = (props) => {
 						</div>
 					</div>
 					<div className="home-body-game-body">
-						{page == "profile" && <Profile />}
+						{page == "profile" && <Profile user={user} profile={profile} loans={loans} stocks={stocks} />}
 						{page == "events" && <Events />}
 						{page == "loans" && <Loans />}
 						{page == "stocks" && <Stocks />}

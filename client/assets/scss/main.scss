@@ -42,12 +42,68 @@ select {
       border-radius: 1em;
       border: 1px solid black;
       box-shadow: 0.5em 0.25em;
-      padding: 1em;
+      overflow: hidden;
       .home-body-game-nav{
         min-width: 20%;
+        background: rgba(0,0,0,0.2);
+        border-radius: 1em 0 0 1em;
+        .home-body-game-nav-pic {
+          max-width: calc(100% - 2em);
+          border-radius: 100em;
+          margin: 1em;
+        }
+        .home-body-game-nav-name {
+          font-size: 1.5em;
+        }
+        .home-body-game-nav-link{
+          padding: 1em;
+          text-shadow: 0.05em 0.05em;
+          background: rgba(140, 0, 255, 0.2);
+          margin: 0.5em 0;
+        }
       }
       .home-body-game-body{
-        min-width: 80%;
+        min-width: calc(80% - 2em);
+        padding: 3em 1em;
+      }
+    }
+  }
+}
+
+.profile {
+  text-align: start;
+  overflow-y: scroll;
+  max-height: 100% !important;
+  position: relative;
+  .profile-details{
+
+  }
+  .profile-header{
+    font-size: 1.5em;
+    font-weight: 900;
+    padding: 0.5em 0 0 0;
+  }
+  .profile-seg{
+    background: rgba(0, 0, 153, 0.2);
+    border-radius: 1em;
+    padding: 0.5em;
+    margin: 1em 0;
+    .profile-seg-item{
+      max-height: 10em;
+      overflow: hidden;
+      display: flex;
+      margin: 1em;
+      padding: 1em;
+      background: rgba(0, 0, 153, 0.2);
+      .profile-seg-item-pic{
+        width: 8em;
+        height: 8em;
+      }
+      .profile-seg-item-details{
+        padding: 1em;
+        .profile-seg-item-details-item{
+          padding: 0.2em;
+        }
       }
     }
   }

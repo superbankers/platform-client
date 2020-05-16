@@ -20,7 +20,12 @@ const Main = (props) => {
 			<div className="login-body">
 				<div className="login-body-game">
           <div className="login-body-game-label">Login</div>
-          <form onSubmit={props.login}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              props.login(form.username, form.password)
+            }}
+          >
             <input
               type="text"
               placeholder="USERNAME"
