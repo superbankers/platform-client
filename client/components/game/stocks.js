@@ -10,7 +10,7 @@ const Stocks = (props) => {
     <div className="stocks">
       <div className="list-header">Stocks</div>
       <div className="list-seg">
-        {props.profile.stocks.map((stock, num) => {
+        {props.stocks.map((stock, num) => {
           const listStock = props.stocks.filter(s => s.name == stock.name)[0];
           return (
             <div

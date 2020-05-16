@@ -161,10 +161,7 @@ export default (state = initialState, action) => {
     case "LOAD_GAME":
       return {
         ...state,
-        profile: action.data.profile,
-        stocks: action.data.stocks,
-        loans: action.data.loans,
-        events: action.data.events
+        ...action.data
       }
     case "LOAN_MODAL":
       return {
@@ -236,6 +233,24 @@ export default (state = initialState, action) => {
           loans
         }
       }
+    case "BUY_STOCK":
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          bank_balance: action.data.bank_balance,
+          stocks: action.data.stocks
+        }
+      }
+    case "SELL_STOCK":
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          bank_balance: action.data.bank_balance,
+          stocks: action.data.stocks
+        }
+      }
     default:
       return state
   }
@@ -246,7 +261,7 @@ export function restartGame() {
     const username = window.localStorage.getItem("username");
     const password = window.localStorage.getItem("password");
     axios({
-      method: 'post',
+      method: 'put',
       url: 'http://127.0.0.1:8085/api/restartGame',
       data: { username, password }
     })
@@ -271,7 +286,6 @@ export function login(username, password) {
       .then(function (res) {
         console.log(res);
         // if success
-        const { username, email, pic } = res;
         window.localStorage.setItem('username', username);
         window.localStorage.setItem('password', password);
         dispatch({ type: "LOGIN", data: { username, email, pic } });
@@ -283,21 +297,30 @@ export function login(username, password) {
   }
 }
 export function loadGame() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const username = window.localStorage.getItem("username");
     const password = window.localStorage.getItem("password");
-    const { start_time } = getState().main.profile
     axios({
-      method: 'get',
+      method: 'post',
       url: 'http://127.0.0.1:8085/api/loadGame',
       data: { username, password }
     })
       .then(function (res) {
         console.log(res);
         // if success
-        const { profile, stocks, loans, events } = res;
-        dispatch({ type: "LOAD_GAME", data: { profile, stocks, loans, events } });
-        dispatch(toggleEventModal(true, getHours(start_time)))
+        const { profile } = res.data;
+        dispatch({ type: "LOAD_GAME", data: {
+          profile: res.data.profile,
+          stocks: res.data.stocks,
+          loans: res.data.loans,
+          events: res.data.events,
+          user: {
+            username,
+            email: username,
+            pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0ZmqP9jMF1hOSUFwCJuMtD6mzAeD1awlDJMF0FbsQ92UEo8K&s"
+          }
+        } });
+        dispatch(toggleEventModal(true, getHours(profile.start_time)))
       })
       .catch(function (error) {
         console.log(error);
@@ -329,14 +352,20 @@ export function toggleEventModal(bool, index=0) {
   }
 }
 
-export function getLoan(start_year, end_year, name, loan_amount, balance) {
+export function getLoan(start_year, end_year, name, amount, balance) {
   return (dispatch) => {
     const username = window.localStorage.getItem("username");
     const password = window.localStorage.getItem("password");
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/getLoan',
-      data: { start_year, end_year, name, loan_amount, username, password }
+      url: 'http://127.0.0.1:8085/api/loans/applyLoan',
+      data: {
+        start: start_year,
+        end: end_year,
+        name,
+        username: "test@email.com",
+        amount: parseInt(amount)
+      }
     })
       .then(function (res) {
         console.log(res);
@@ -344,7 +373,7 @@ export function getLoan(start_year, end_year, name, loan_amount, balance) {
         dispatch({
           type: "GET_LOAN",
           data: {
-            loan: { name, loan_amount, start_year, end_year },
+            loan: { name, loan_amount: amount, start_year, end_year },
             bank_balance: balance
           }
         });
@@ -363,7 +392,7 @@ export function repayLoan(name, repayment_amount, balance) {
     const password = window.localStorage.getItem("password");
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/repayLoan',
+      url: 'http://127.0.0.1:8085/api/loans/repayLoan',
       data: { name, repayment_amount, username, password }
     })
       .then(function (res) {
@@ -392,7 +421,7 @@ export function buyStock(shares, value, name, balance) {
     const password = window.localStorage.getItem("password");
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/buyStock',
+      url: 'http://127.0.0.1:8085/api/stocks/buy',
       data: { shares, value, name, username, password }
     })
       .then(function (res) {
@@ -401,7 +430,7 @@ export function buyStock(shares, value, name, balance) {
         dispatch({
           type: "BUY_STOCK",
           data: {
-            stock: res.stock,
+            stocks: res.data,
             bank_balance: balance
           }
         });
@@ -420,7 +449,7 @@ export function sellStock(shares, value, name, balance) {
     const password = window.localStorage.getItem("password");
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:8085/api/sellStock',
+      url: 'http://127.0.0.1:8085/api/stocks/sell',
       data: { shares, value, name, username, password }
     })
       .then(function (res) {
@@ -429,7 +458,7 @@ export function sellStock(shares, value, name, balance) {
         dispatch({
           type: "SELL_STOCK",
           data: {
-            stock: res.stock,
+            stocks: res.data,
             bank_balance: balance
           }
         });

@@ -13,7 +13,9 @@ const Profile = (props) => {
         className="icon-refresh modal-close"
         onClick={() => props.restartGame()}
         role="button"
-      >Restart Game</div>
+      >
+        Restart Game
+      </div>
       <div className="profile-details">Username: {props.user.username}</div>
       <div className="profile-details">Email: {props.user.email}</div>
       <div className="profile-details">Salary: {props.profile.salary}</div>
