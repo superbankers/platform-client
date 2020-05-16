@@ -3,7 +3,7 @@ import React from 'react'
 import { getHours } from '../common/helper'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { toggleLoanModal } from '../../redux/reducers/main'
+import { toggleLoanModal, toggleStockModal } from '../../redux/reducers/main'
 
 const Profile = (props) => {
   return (
@@ -48,9 +48,8 @@ const Profile = (props) => {
           return (
             <div
               className="list-seg-item"
-              onClick={() => {
-
-              }}
+              onClick={() => props.toggleStockModal(true, stock.name)}
+              role="button"
             >
               <img className="list-seg-item-pic" src={listStock.pic} />
               <div className="list-seg-item-details">
@@ -78,6 +77,6 @@ const mapStateToProps = (state) => {
     state
   }
 }
-const mapDispatchToProps = dispatch => bindActionCreators({ toggleLoanModal }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ toggleLoanModal, toggleStockModal }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

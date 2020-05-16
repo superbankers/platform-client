@@ -16,6 +16,10 @@ const initialState = {
     stock: {
       open: false,
       name: ""
+    },
+    success: {
+      open: false,
+      success: false
     }
   },
   user: {
@@ -116,6 +120,18 @@ export default (state = initialState, action) => {
           }
         } 
       }
+    case "SUCCESS_MODAL":
+      return {
+        ...state,
+        modals: {
+          ...state.modals,
+          success: {
+            ...state.modals.success,
+            open: action.data.bool,
+            success: action.data.success
+          }
+        } 
+      }
     case "GET_LOAN":
       return {
         ...state,
@@ -197,6 +213,12 @@ export function toggleStockModal(bool, name="") {
   }
 }
 
+export function toggleSuccessModal(bool, success=true) {
+  return (dispatch) => {
+    dispatch({ type: "SUCCESS_MODAL", data: { bool, success } })
+  }
+}
+
 export function getLoan(start_year, end_year, name, loan_amount, balance) {
   return (dispatch) => {
     const username = window.localStorage.getItem("username");
@@ -216,9 +238,11 @@ export function getLoan(start_year, end_year, name, loan_amount, balance) {
             bank_balance: balance
           }
         });
+        dispatch(toggleSuccessModal(true, true));
       })
       .catch(function (error) {
         console.log(error);
+        dispatch(toggleSuccessModal(true, false));
       })
   }
 }
@@ -242,9 +266,68 @@ export function repayLoan(name, repayment_amount, balance) {
             bank_balance: balance
           }
         });
+        dispatch(toggleSuccessModal(true, true));
       })
       .catch(function (error) {
         console.log(error);
+        dispatch(toggleSuccessModal(true, false));
+      })
+  }
+}
+
+
+export function buyStock(shares, value, name, balance) {
+  return (dispatch) => {
+    const username = window.localStorage.getItem("username");
+    const password = window.localStorage.getItem("password");
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8085/api/buyStock',
+      data: { shares, value, name, username, password }
+    })
+      .then(function (res) {
+        console.log(res);
+        // if success
+        dispatch({
+          type: "BUY_STOCK",
+          data: {
+            stock: res.stock,
+            bank_balance: balance
+          }
+        });
+        dispatch(toggleSuccessModal(true, true));
+      })
+      .catch(function (error) {
+        console.log(error);
+        dispatch(toggleSuccessModal(true, false));
+      })
+  }
+}
+
+export function sellStock(shares, value, name, balance) {
+  return (dispatch) => {
+    const username = window.localStorage.getItem("username");
+    const password = window.localStorage.getItem("password");
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8085/api/sellStock',
+      data: { shares, value, name, username, password }
+    })
+      .then(function (res) {
+        console.log(res);
+        // if success
+        dispatch({
+          type: "SELL_STOCK",
+          data: {
+            stock: res.stock,
+            bank_balance: balance
+          }
+        });
+        dispatch(toggleSuccessModal(true, true));
+      })
+      .catch(function (error) {
+        console.log(error);
+        dispatch(toggleSuccessModal(true, false));
       })
   }
 }

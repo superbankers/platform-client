@@ -110,15 +110,15 @@ select {
   padding: 0.5em;
   margin: 1em 0;
   .list-seg-item{
-    max-height: 10em;
+    min-height: 10em;
     overflow: hidden;
     display: flex;
     margin: 1em;
     padding: 1em;
     background: rgba(0, 0, 153, 0.2);
     .list-seg-item-pic{
-      width: 8em;
-      height: 8em;
+      width: 8em !important;
+      height: 8em !important;
     }
     .list-seg-item-details{
       padding: 1em;
@@ -230,6 +230,21 @@ select {
     border-radius: 0.5em;
     box-shadow: 0.2em 0.2em black;
   }
+}
+
+.modal-success{
+  font-size: 5em;
+  color: rgb(80, 124, 13);
+  &.error {
+    color: rgb(255, 122, 122);
+  }
+}
+
+.events {
+  text-align: start;
+  overflow-y: scroll;
+  max-height: 100% !important;
+  position: relative;
 }
 
 .d-flex{

@@ -8,6 +8,8 @@ import Loans from './game/loans'
 import Stocks from './game/stocks'
 import Profile from './game/profile'
 import LoanModal from './game/loan-modal'
+import StockModal from './game/stock-modal'
+import SuccessModal from './game/success-modal'
 // import Footer from './common/footer'
 
 /* eslint-disable */
@@ -23,6 +25,8 @@ const Main = (props) => {
 		<div className="home">
 			<Header />
 			<LoanModal />
+			<StockModal />
+			<SuccessModal />
 			<div className="home-body">
 				<div className="home-body-game">
 					<div className="home-body-game-nav">
@@ -64,7 +68,7 @@ const Main = (props) => {
 					</div>
 					<div className="home-body-game-body">
 						{page == "profile" && <Profile user={user} profile={profile} loans={loans} stocks={stocks} />}
-						{page == "events" && <Events />}
+						{page == "events" && <Events user={user} profile={profile} loans={loans} stocks={stocks} events={events} />}
 						{page == "loans" && <Loans user={user} profile={profile} loans={loans} stocks={stocks} />}
 						{page == "stocks" && <Stocks user={user} profile={profile} loans={loans} stocks={stocks} />}
 					</div>

@@ -1,8 +1,11 @@
 /* eslint-disable */
 import React from 'react'
 import { getHours } from '../common/helper'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { toggleStockModal } from '../../redux/reducers/main'
 
-const Events = (props) => {
+const Stocks = (props) => {
   return (
     <div className="stocks">
       <div className="list-header">Stocks</div>
@@ -12,9 +15,7 @@ const Events = (props) => {
           return (
             <div
               className="list-seg-item"
-              onClick={() => {
-
-              }}
+              onClick={() => props.toggleStockModal(true, stock.name)}
             >
               <img className="list-seg-item-pic" src={listStock.pic} />
               <div className="list-seg-item-details">
@@ -37,4 +38,13 @@ const Events = (props) => {
   )
 }
 
-export default Events;
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+const mapDispatchToProps = dispatch => bindActionCreators({ 
+  toggleStockModal
+ }, dispatch)
+ 
+export default connect(mapStateToProps, mapDispatchToProps)(Stocks)
