@@ -23,7 +23,6 @@ const StockModal = (props) => {
   const { name } = props.state.main.modals.stock
   const stock = props.state.main.stocks.filter((s) => s.name == name)
   const myStock = props.state.main.profile.stocks.filter((s) => s.name == name)
-  console.log(stock)
   return (
     <Modal
       isOpen={props.state.main.modals.stock.open}

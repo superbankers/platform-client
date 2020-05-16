@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
+import { loadGame } from '../redux/reducers/main'
 import Header from './common/header'
 import Events from './game/events'
 import Loans from './game/loans'
 import Stocks from './game/stocks'
 import Profile from './game/profile'
+import Social from './game/social'
 import LoanModal from './game/loan-modal'
 import StockModal from './game/stock-modal'
 import SuccessModal from './game/success-modal'
@@ -15,12 +17,11 @@ import SuccessModal from './game/success-modal'
 /* eslint-disable */
 
 const Main = (props) => {
-	const { user, stocks, profile, loans, events } = props.state.main;
+	const { user, stocks, profile, loans, events, social } = props.state.main;
 	useEffect(() => {
-    
+    props.loadGame();
   }, []);
 	const [page, setPage] = useState("profile")
-	console.log(props)
 	return (
 		<div className="home">
 			<Header />
@@ -65,12 +66,21 @@ const Main = (props) => {
 						>
 							Stocks
 						</div>
+						<div
+							className="home-body-game-nav-link"
+							onClick={() => setPage("social")}
+							role="button"
+            	tabIndex={0}
+						>
+							Social
+						</div>
 					</div>
 					<div className="home-body-game-body">
 						{page == "profile" && <Profile user={user} profile={profile} loans={loans} stocks={stocks} />}
 						{page == "events" && <Events user={user} profile={profile} loans={loans} stocks={stocks} events={events} />}
 						{page == "loans" && <Loans user={user} profile={profile} loans={loans} stocks={stocks} />}
 						{page == "stocks" && <Stocks user={user} profile={profile} loans={loans} stocks={stocks} />}
+						{page == "social" && <Social social={social} />}
 					</div>
 				</div>
 			</div>
@@ -83,6 +93,6 @@ const mapStateToProps = (state) => {
     state
   }
 }
-const mapDispatchToProps = dispatch => bindActionCreators({  }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ loadGame }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

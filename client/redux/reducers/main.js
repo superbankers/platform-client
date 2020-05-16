@@ -71,6 +71,26 @@ const initialState = {
       pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
     }
+  ],
+  social: [
+    {
+      username: "User Not Available",
+      email: "User Not Available",
+      valuation: 1920,
+      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0ZmqP9jMF1hOSUFwCJuMtD6mzAeD1awlDJMF0FbsQ92UEo8K&s",
+    },
+    {
+      username: "User Not Available",
+      email: "User Not Available",
+      valuation: 1922,
+      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0ZmqP9jMF1hOSUFwCJuMtD6mzAeD1awlDJMF0FbsQ92UEo8K&s",
+    },
+    {
+      username: "User Not Available",
+      email: "User Not Available",
+      valuation: 3220,
+      pic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_0ZmqP9jMF1hOSUFwCJuMtD6mzAeD1awlDJMF0FbsQ92UEo8K&s",
+    }
   ]
 }
 

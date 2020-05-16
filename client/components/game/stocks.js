@@ -16,6 +16,7 @@ const Stocks = (props) => {
             <div
               className="list-seg-item"
               onClick={() => props.toggleStockModal(true, stock.name)}
+              role="button"
             >
               <img className="list-seg-item-pic" src={listStock.pic} />
               <div className="list-seg-item-details">
