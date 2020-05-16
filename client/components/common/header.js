@@ -30,20 +30,32 @@ const Header = () => {
   return (
     <div className="common-header">
       <div className="common-header-centering">
-        <div className="common-header-icon icon-globe" />
+        <div className="common-header-icon">SUPERBANKERS</div>
         {/* desktop links lg/xl breakpoints */}
         <div className="common-header-links">
           <Link
             to="/"
             className="common-header-links-item"
           >
-            HOME
+            GAME
           </Link>
           <Link
-            to="/todo"
+            to="/video"
             className="common-header-links-item"
           >
-            TODO
+            TRADING
+          </Link>
+          <Link
+            to="/video"
+            className="common-header-links-item"
+          >
+            EDUCATIONAL VIDEOS
+          </Link>
+          <Link
+            to="/login"
+            className="common-header-links-item"
+          >
+            Login
           </Link>
         </div>
         {/* mobile links xs/sm/md breakpoints */}

@@ -11,7 +11,7 @@ body {
 
   text-align: center;
   color: black;
-  // background: url($image-path + 'sample.jpg');
+  background: url("https://image.shutterstock.com/z/stock-vector-bank-building-on-the-urban-landscape-vector-illustration-flat-style-582814390.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -27,6 +27,71 @@ select {
   outline: none;
 }
 
-.home {
+.home{
+  min-height: 100vh;
+  position: relative;
+  .home-body{
+    padding: $header-height 0 $footer-height 0;
+    .home-body-game{
+      margin-top: 2em;
+      display: flex;
+      max-width: 60em;
+      background: rgb(197, 193, 255);
+      margin: 2em auto;
+      height: 80vh;
+      border-radius: 1em;
+      border: 1px solid black;
+      box-shadow: 0.5em 0.25em;
+      padding: 1em;
+      .home-body-game-nav{
+        min-width: 20%;
+      }
+      .home-body-game-body{
+        min-width: 80%;
+      }
+    }
+  }
+}
 
+.login{
+  min-height: 100vh;
+  position: relative;
+  .login-body{
+    padding: $header-height 0 $footer-height 0;
+    .login-body-game{
+      font-size: 2em;
+      margin: 2em auto;
+      max-width: 20em;
+      background: white;
+      padding: 1em;
+      border-radius: 0.4em;
+      .login-body-game-label{
+        font-size: 1.5em;
+        text-align: left;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+
+        input{
+          margin: 0.5em 0;
+          padding: 0.5em;
+        }
+      }
+    }
+  }
+}
+
+.video{
+  min-height: 100vh;
+  position: relative;
+  .video-body{
+    padding: $header-height 0 $footer-height 0;
+    .video-body-game{
+      font-size: 5em;
+      background:black;
+      color: wheat;
+      margin-top: 20px;
+    }
+  }
 }

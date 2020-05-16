@@ -50,6 +50,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
     "prop-types": "^15.7.2",
