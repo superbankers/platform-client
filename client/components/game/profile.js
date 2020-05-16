@@ -3,12 +3,17 @@ import React from 'react'
 import { getHours } from '../common/helper'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { toggleLoanModal, toggleStockModal } from '../../redux/reducers/main'
+import { toggleLoanModal, toggleStockModal, restartGame } from '../../redux/reducers/main'
 
 const Profile = (props) => {
   return (
     <div className="profile">
       <div className="list-header">Profile</div>
+      <div
+        className="icon-refresh modal-close"
+        onClick={() => props.restartGame()}
+        role="button"
+      >Restart Game</div>
       <div className="profile-details">Username: {props.user.username}</div>
       <div className="profile-details">Email: {props.user.email}</div>
       <div className="profile-details">Salary: {props.profile.salary}</div>
@@ -78,6 +83,6 @@ const mapStateToProps = (state) => {
     state
   }
 }
-const mapDispatchToProps = dispatch => bindActionCreators({ toggleLoanModal, toggleStockModal }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ toggleLoanModal, toggleStockModal, restartGame }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

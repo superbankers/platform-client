@@ -241,6 +241,26 @@ export default (state = initialState, action) => {
   }
 }
 
+export function restartGame() {
+  return (dispatch) => {
+    const username = window.localStorage.getItem("username");
+    const password = window.localStorage.getItem("password");
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8085/api/restartGame',
+      data: { username, password }
+    })
+      .then(function (res) {
+        console.log(res);
+        // if success
+        window.location = '/'
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+}
+
 export function login(username, password) {
   return (dispatch) => {
     axios({
