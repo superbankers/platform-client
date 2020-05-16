@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="common-header">
       <div className="common-header-centering">
-        <div className="common-header-icon">SUPERBANKERS</div>
+        <div className="common-header-icon">Razer Simulation</div>
         {/* desktop links lg/xl breakpoints */}
         <div className="common-header-links">
           <Link

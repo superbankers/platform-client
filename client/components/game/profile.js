@@ -8,6 +8,7 @@ import { toggleLoanModal, toggleStockModal } from '../../redux/reducers/main'
 const Profile = (props) => {
   return (
     <div className="profile">
+      <div className="list-header">Profile</div>
       <div className="profile-details">Username: {props.user.username}</div>
       <div className="profile-details">Email: {props.user.email}</div>
       <div className="profile-details">Salary: {props.profile.salary}</div>
