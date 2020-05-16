@@ -5,7 +5,7 @@ import { routerMiddleware } from 'connected-react-router'
 import createRootReducer from './reducers'
 
 export const history = createBrowserHistory()
-
+/* eslint-disable no-underscore-dangle */
 export default function configureStore(preloadedState) {
   const store = createStore(
     createRootReducer(history), // root reducer with router state
@@ -15,6 +15,7 @@ export default function configureStore(preloadedState) {
         routerMiddleware(history), // for dispatching history actions
         thunk
       ),
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     ),
   )
 

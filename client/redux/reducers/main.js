@@ -8,6 +8,16 @@ import { push } from 'connected-react-router'
 // Hardcode 10 events, 10 valuations, 10 interests rates
 // 3 loans, 40 stocks
 const initialState = {
+  modals: {
+    loan: {
+      open: false,
+      name: ""
+    },
+    stock: {
+      open: false,
+      name: ""
+    }
+  },
   user: {
     username: "User Not Available",
     email: "User Not Available",
@@ -19,6 +29,7 @@ const initialState = {
     start_time: "2020-05-16 10:30:22", // datetime
     loans: [{
       name: "Sample Loan", // unique identifier
+      loan_amount: 100,
       start_year: 2002,
       end_year: 2010,
     }], 
@@ -44,7 +55,7 @@ const initialState = {
     {
       name: "Sample Loan", // unique identifier
       pic: "https://cdn.iconscout.com/icon/free/png-256/bank-1850789-1571030.png", // give default bank photo link
-      bank: "",
+      bank: "DBS",
       risk_assessment: 8, // scale of 1 to 10, 10 being the highest
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis.",
       interest_rates: [9, 8, 7, 6, 5, 4, 3, 2, 1.3, 2.2] // annual interest rate (index 0 is current interest)
@@ -70,7 +81,7 @@ export default (state = initialState, action) => {
           ...state.user,
           username: action.data.username,
           email: action.data.email,
-          pic: action.data.pic,
+          pic: action.data.pic
         },
       }
     case "LOAD_GAME":
@@ -79,7 +90,53 @@ export default (state = initialState, action) => {
         profile: action.data.profile,
         stocks: action.data.stocks,
         loans: action.data.loans,
-        events: action.data.events,
+        events: action.data.events
+      }
+    case "LOAN_MODAL":
+      return {
+        ...state,
+        modals: {
+          ...state.modals,
+          loan: {
+            ...state.modals.loan,
+            open: action.data.bool,
+            name: action.data.name
+          }
+        } 
+      }
+    case "STOCK_MODAL":
+      return {
+        ...state,
+        modals: {
+          ...state.modals,
+          stock: {
+            ...state.modals.stock,
+            open: action.data.bool,
+            name: action.data.name
+          }
+        } 
+      }
+    case "GET_LOAN":
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          bank_balance: action.data.bank_balance,
+          loans: [
+            ...state.profile.loans,
+            action.data.loans
+          ]
+        }
+      }
+    case 'REPAY_LOAN':
+      const loans = state.profile.loans.filter((l) => l.name != action.data.loan);
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          bank_balance: action.data.bank_balance,
+          loans
+        }
       }
     default:
       return state
@@ -121,6 +178,70 @@ export function loadGame() {
         // if success
         const { profile, stocks, loans, events } = res;
         dispatch({ type: "LOAD_GAME", data: { profile, stocks, loans, events } });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+}
+
+export function toggleLoanModal(bool, name="") {
+  return (dispatch) => {
+    dispatch({ type: "LOAN_MODAL", data: { bool, name } })
+  }
+}
+
+export function toggleStockModal(bool, name="") {
+  return (dispatch) => {
+    dispatch({ type: "STOCK_MODAL", data: { bool, name } })
+  }
+}
+
+export function getLoan(start_year, end_year, name, loan_amount, balance) {
+  return (dispatch) => {
+    const username = window.localStorage.getItem("username");
+    const password = window.localStorage.getItem("password");
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8085/api/getLoan',
+      data: { start_year, end_year, name, loan_amount, username, password }
+    })
+      .then(function (res) {
+        console.log(res);
+        // if success
+        dispatch({
+          type: "GET_LOAN",
+          data: {
+            loan: { name, loan_amount, start_year, end_year },
+            bank_balance: balance
+          }
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+}
+
+export function repayLoan(name, repayment_amount, balance) {
+  return (dispatch) => {
+    const username = window.localStorage.getItem("username");
+    const password = window.localStorage.getItem("password");
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8085/api/repayLoan',
+      data: { name, repayment_amount, username, password }
+    })
+      .then(function (res) {
+        console.log(res);
+        // if success
+        dispatch({
+          type: "REPAY_LOAN",
+          data: {
+            loan: name,
+            bank_balance: balance
+          }
+        });
       })
       .catch(function (error) {
         console.log(error);

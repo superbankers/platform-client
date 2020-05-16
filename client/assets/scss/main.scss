@@ -78,32 +78,52 @@ select {
   .profile-details{
 
   }
-  .profile-header{
-    font-size: 1.5em;
-    font-weight: 900;
-    padding: 0.5em 0 0 0;
+}
+
+.loans {
+  text-align: start;
+  overflow-y: scroll;
+  max-height: 100% !important;
+  position: relative;
+  .loans-details{
+
   }
-  .profile-seg{
+}
+.stocks{
+  text-align: start;
+  overflow-y: scroll;
+  max-height: 100% !important;
+  position: relative;
+  .stocks-details{
+
+  }
+}
+
+.list-header{
+  font-size: 1.5em;
+  font-weight: 900;
+  padding: 0.5em 0 0 0;
+}
+.list-seg{
+  background: rgba(0, 0, 153, 0.2);
+  border-radius: 1em;
+  padding: 0.5em;
+  margin: 1em 0;
+  .list-seg-item{
+    max-height: 10em;
+    overflow: hidden;
+    display: flex;
+    margin: 1em;
+    padding: 1em;
     background: rgba(0, 0, 153, 0.2);
-    border-radius: 1em;
-    padding: 0.5em;
-    margin: 1em 0;
-    .profile-seg-item{
-      max-height: 10em;
-      overflow: hidden;
-      display: flex;
-      margin: 1em;
+    .list-seg-item-pic{
+      width: 8em;
+      height: 8em;
+    }
+    .list-seg-item-details{
       padding: 1em;
-      background: rgba(0, 0, 153, 0.2);
-      .profile-seg-item-pic{
-        width: 8em;
-        height: 8em;
-      }
-      .profile-seg-item-details{
-        padding: 1em;
-        .profile-seg-item-details-item{
-          padding: 0.2em;
-        }
+      .list-seg-item-details-item{
+        padding: 0.2em;
       }
     }
   }
@@ -151,3 +171,69 @@ select {
     }
   }
 }
+
+.modal-close{
+  color: red;
+  text-align: right;
+}
+.modal-top{
+  display: flex;
+  text-align: start;
+  .modal-top-img{
+    width: 10em;
+    height: 10em;
+  }
+  .modal-top-description{
+    padding: 1em;
+    .modal-top-description-item{
+      padding: 0.2em 0;
+    }
+  }
+}
+
+.modal-getloan{
+  text-align: start;
+  background: rgba(255, 139, 30, 0.2);
+  padding: 1em;
+  margin: 1em 0;
+  .modal-getloan-header{
+    font-size: 1.5em;
+  }
+  .modal-getloan-input{
+      
+  }
+  .modal-getloan-button{
+    background: rgb(17, 184, 17);
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0.2em 0.2em black;
+  }
+}
+
+.modal-repayloan{
+  text-align: start;
+  background: rgba(255, 139, 30, 0.2);
+  padding: 1em;
+  margin: 1em 0;
+  .modal-repayloan-header{
+    font-size: 1.5em;
+  }
+  .model-repayloan-details{
+    padding: 0.2em;
+  }
+  .model-repayloan-button{
+    width: 7em;
+    margin: 0.2em 0;
+    text-align: center;
+    background: rgb(17, 184, 17);
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0.2em 0.2em black;
+  }
+}
+
+.d-flex{
+  display: flex;
+  justify-content: space-between;
+}
+
