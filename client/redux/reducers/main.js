@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import { push } from 'connected-react-router'
+import { getHours } from '../../components/common/helper'
 
 // Time moves at 1 year = 1 hr
 // All arrays (valuation and interest_rates) starts in the year 2000
@@ -20,6 +21,10 @@ const initialState = {
     success: {
       open: false,
       success: false
+    },
+    event: {
+      open: false,
+      index: 0
     }
   },
   user: {
@@ -66,6 +71,51 @@ const initialState = {
     }
   ],
   events: [
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
+    {
+      name: "The Great Depression", // unique identifier
+      pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus ex felis, ut mollis diam porttitor sed. Aliquam ultrices dignissim egestas. Morbi mi diam, mattis maximus hendrerit ultricies, hendrerit vel neque. Suspendisse potenti. Morbi in pulvinar justo, eget rutrum quam. Vestibulum tincidunt, dolor ut porta iaculis, orci massa semper nunc, sodales ultricies enim sapien nec magna. Nullam commodo enim et blandit laoreet. Fusce elit sem, semper in dapibus ut, consequat eu turpis."
+    },
     {
       name: "The Great Depression", // unique identifier
       pic: "https://png.pngtree.com/png-clipart/20200225/original/pngtree-terrible-explosion-icon-isolated-png-image_5260704.jpg", // give default photo link
@@ -152,6 +202,18 @@ export default (state = initialState, action) => {
           }
         } 
       }
+    case "EVENT_MODAL":
+      return {
+        ...state,
+        modals: {
+          ...state.modals,
+          event: {
+            ...state.modals.event,
+            open: action.data.bool,
+            index: action.data.index
+          }
+        } 
+      }
     case "GET_LOAN":
       return {
         ...state,
@@ -201,9 +263,10 @@ export function login(username, password) {
   }
 }
 export function loadGame() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const username = window.localStorage.getItem("username");
     const password = window.localStorage.getItem("password");
+    const { start_time } = getState().main.profile
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8085/api/loadGame',
@@ -214,6 +277,7 @@ export function loadGame() {
         // if success
         const { profile, stocks, loans, events } = res;
         dispatch({ type: "LOAD_GAME", data: { profile, stocks, loans, events } });
+        dispatch(toggleEventModal(true, getHours(start_time)))
       })
       .catch(function (error) {
         console.log(error);
@@ -236,6 +300,12 @@ export function toggleStockModal(bool, name="") {
 export function toggleSuccessModal(bool, success=true) {
   return (dispatch) => {
     dispatch({ type: "SUCCESS_MODAL", data: { bool, success } })
+  }
+}
+
+export function toggleEventModal(bool, index=0) {
+  return (dispatch) => {
+    dispatch({ type: "EVENT_MODAL", data: { bool, index } })
   }
 }
 

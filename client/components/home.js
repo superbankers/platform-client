@@ -12,6 +12,7 @@ import Social from './game/social'
 import LoanModal from './game/loan-modal'
 import StockModal from './game/stock-modal'
 import SuccessModal from './game/success-modal'
+import EventModal from './game/event-modal'
 // import Footer from './common/footer'
 
 /* eslint-disable */
@@ -28,6 +29,7 @@ const Main = (props) => {
 			<LoanModal />
 			<StockModal />
 			<SuccessModal />
+			<EventModal />
 			<div className="home-body">
 				<div className="home-body-game">
 					<div className="home-body-game-nav">
