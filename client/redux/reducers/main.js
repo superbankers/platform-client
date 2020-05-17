@@ -355,6 +355,7 @@ export function toggleEventModal(bool, index=0) {
 
 export function getLoan(start_year, end_year, name, amount, balance) {
   return (dispatch) => {
+    console.log(start_year, end_year, name, amount, balance)
     const username = window.localStorage.getItem("username");
     const password = window.localStorage.getItem("password");
     axios({
@@ -374,8 +375,8 @@ export function getLoan(start_year, end_year, name, amount, balance) {
         dispatch({
           type: "GET_LOAN",
           data: {
-            loan: { name, loan_amount: amount, start_year, end_year },
-            bank_balance: balance
+            loan: { name, loan_amount: parseInt(amount), start_year, end_year },
+            bank_balance: parseInt(balance)
           }
         });
         dispatch(toggleSuccessModal(true, true));
