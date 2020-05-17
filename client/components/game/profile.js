@@ -28,7 +28,7 @@ const Profile = (props) => {
       <div className="list-seg">
         {props.profile.loans.map((loan, num) => {
           const listLoan = props.loans.filter(l => l.name == loan.name)[0];
-          const percentChange = listLoan.interest_rates[hours] - listLoan.interest_rates[hours > 0 ? hours - 1 : hours]
+          const percentChange = (listLoan.interest_rates[hours] - listLoan.interest_rates[hours > 0 ? hours - 1 : hours]) / listLoan.interest_rates[hours > 0 ? hours - 1 : hours]
           return (
             <div
               className="list-seg-item"
@@ -70,7 +70,7 @@ const Profile = (props) => {
       <div className="list-seg">
         {props.profile.stocks.map((stock, num) => {
           const listStock = props.stocks.filter(s => s.name == stock.name)[0];
-          const percentChange = listStock.valuation[hours] - listStock.valuation[hours > 0 ? hours - 1 : hours]
+          const percentChange = (listStock.valuation[hours] - listStock.valuation[hours > 0 ? hours - 1 : hours]) / listStock.valuation[hours > 0 ? hours - 1 : hours]
           return (
             <div
               className="list-seg-item"

@@ -14,7 +14,7 @@ const Stocks = (props) => {
         {props.stocks.map((stock, num) => {
           const listStock = props.stocks.filter(s => s.name == stock.name)[0];
           const hours = getHours(props.profile.start_time);
-          const percentChange = listStock.valuation[hours] - listStock.valuation[hours > 0 ? hours - 1 : hours]
+          const percentChange = (listStock.valuation[hours] - listStock.valuation[hours > 0 ? hours - 1 : hours]) / listStock.valuation[hours > 0 ? hours - 1 : hours]
           return (
             <div
               className="list-seg-item"

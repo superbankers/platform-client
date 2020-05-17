@@ -24,7 +24,7 @@ const Loans = (props) => {
       <div className="list-seg">
         {props.loans.map((loan, num) => {
           const hours = getHours(props.profile.start_time);
-          const percentChange = loan.interest_rates[hours] - loan.interest_rates[hours > 0 ? hours - 1 : hours];
+          const percentChange = (loan.interest_rates[hours] - loan.interest_rates[hours > 0 ? hours - 1 : hours]) / loan.interest_rates[hours > 0 ? hours - 1 : hours]
           return (
             <div
               className="list-seg-item"

@@ -286,8 +286,9 @@ export function login(username, password) {
       .then(function (res) {
         console.log(res);
         // if success
-        window.localStorage.setItem('username', username);
-        window.localStorage.setItem('password', password);
+        const { localStorage } = window
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
         dispatch({ type: "LOGIN", data: { username, email, pic } });
         dispatch(push('/'));
       })
@@ -363,7 +364,7 @@ export function getLoan(start_year, end_year, name, amount, balance) {
         start: start_year,
         end: end_year,
         name,
-        username: "test@email.com",
+        username: username,
         amount: parseInt(amount)
       }
     })
