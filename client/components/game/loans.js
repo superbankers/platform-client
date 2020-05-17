@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react'
+import cx from 'classnames'
 import { getHours } from '../common/helper'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -22,22 +23,38 @@ const Loans = (props) => {
       <div className="list-header">Loans</div>
       <div className="list-seg">
         {props.loans.map((loan, num) => {
+          const hours = getHours(props.profile.start_time);
+          const percentChange = loan.interest_rates[hours] - loan.interest_rates[hours > 0 ? hours - 1 : hours];
           return (
             <div
               className="list-seg-item"
               onClick={() => props.toggleLoanModal(true, loan.name)}
               role="button"
             >
-              <img className="list-seg-item-pic" src={loan.pic} />
-              <div className="list-seg-item-details">
-                <div className="list-seg-item-details-item">Name:</div>
-                <div className="list-seg-item-details-item">Bank:</div>
-                <div className="list-seg-item-details-item">Interest Rate:</div>
+              <div className="list-seg-item-content">
+                <img className="list-seg-item-pic" src={loan.pic} />
+                <div className="list-seg-item-details">
+                  <div className="list-seg-item-details-item">Name:</div>
+                  <div className="list-seg-item-details-item">Bank:</div>
+                  <div className="list-seg-item-details-item">Interest Rate:</div>
+                </div>
+                <div className="list-seg-item-details">
+                  <div className="list-seg-item-details-item">{loan.name}</div>
+                  <div className="list-seg-item-details-item">{loan.bank}</div>
+                  <div className="list-seg-item-details-item">{loan.interest_rates[getHours(props.profile.start_time)]}%</div>
+                </div>
               </div>
-              <div className="list-seg-item-details">
-                <div className="list-seg-item-details-item">{loan.name}</div>
-                <div className="list-seg-item-details-item">{loan.bank}</div>
-                <div className="list-seg-item-details-item">{loan.interest_rates[getHours(props.profile.start_time)]}%</div>
+              <div className={cx("indicator", {
+                "neg": percentChange < 0,
+                "pos": percentChange > 0,
+                "equal": percentChange == 0
+              })}>
+                <div className={cx("indicator-arrow", {
+                  "icon-arrow-up": percentChange > 0,
+                  "icon-arrow-down": percentChange < 0,
+                  "icon-clock": percentChange == 0,
+                })} />
+                <div className="indicator-value">{parseInt(percentChange * 100) / 100}</div>
               </div>
             </div>
           )

@@ -116,9 +116,15 @@ select {
     margin: 1em;
     padding: 1em;
     background: rgba(0, 0, 153, 0.2);
+    justify-content: space-between;
+    .list-seg-item-content{
+      display: flex;
+    }
     .list-seg-item-pic{
       width: 8em !important;
       height: 8em !important;
+      border-radius: 8em;
+      border: 1px solid black;
     }
     .list-seg-item-details{
       padding: 1em;
@@ -251,6 +257,22 @@ select {
 }
 .modal-event-description{
 
+}
+
+.indicator{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &.neg { color: rgb(167, 42, 42); }
+  &.pos { color: rgb(20, 114, 33); }
+  &.equal { color: rgb(43, 61, 141); }
+  .indicator-arrow{
+    font-size: 4em;
+  }
+  .indicator-value{
+    font-size: 2em;
+    text-align: center;
+  }
 }
 
 .events {

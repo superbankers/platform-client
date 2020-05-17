@@ -15,14 +15,17 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     maxWidth: '70vw',
+    overflow: 'scroll',
     background: 'rgb(197, 193, 255)'
   }
 };
+const data = [10,0,-2.5,540];
 const StockModal = (props) => {
   const [amount, setAmount] = useState(0);
   const { name } = props.state.main.modals.stock
   const stock = props.state.main.stocks.filter((s) => s.name == name)
   const myStock = props.state.main.profile.stocks.filter((s) => s.name == name)
+  const hours = getHours(props.state.main.profile.start_time)
   return (
     <Modal
       isOpen={props.state.main.modals.stock.open}
@@ -50,8 +53,8 @@ const StockModal = (props) => {
           <div className="modal-top-description-item">{stock[0] ? stock[0].industry : ""}</div>
           <div className="modal-top-description-item">{stock[0] ? stock[0].risk_assessment : ""}</div>
           <div className="modal-top-description-item">{stock[0] ? stock[0].total_shares : ""}</div>
-          <div className="modal-top-description-item">{stock[0] ? stock[0].valuation[getHours(props.state.main.profile.start_time)] : ""}</div>
-          <div className="modal-top-description-item">{stock[0] ? (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares) : ""}</div>
+          <div className="modal-top-description-item">{stock[0] ? stock[0].valuation[hours] : ""}</div>
+          <div className="modal-top-description-item">{stock[0] ? (stock[0].valuation[hours] / stock[0].total_shares) : ""}</div>
         </div>
       </div>
       <div className="modal-description">{stock[0] ? stock[0].description : ""}</div>
@@ -68,11 +71,11 @@ const StockModal = (props) => {
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
-              <div>{amount} X {stock[0] ? (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares) : ""}(share price) = {stock[0] ? (Math.round(stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount * 100) / 100) : ""} SGD</div>
+              <div>{amount} X {stock[0] ? (stock[0].valuation[hours] / stock[0].total_shares) : ""}(share price) = {stock[0] ? (Math.round(stock[0].valuation[hours] / stock[0].total_shares * amount * 100) / 100) : ""} SGD</div>
               <div
                 className="modal-getloan-button"
                 role="button"
-                onClick={() => props.buyStock(amount, (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount), name, props.state.main.profile.bank_balance - (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount))}
+                onClick={() => props.buyStock(amount, (stock[0].valuation[hours] / stock[0].total_shares * amount), name, props.state.main.profile.bank_balance - (stock[0].valuation[hours] / stock[0].total_shares * amount))}
               >
                 Get Stocks
               </div>
@@ -91,14 +94,14 @@ const StockModal = (props) => {
                 />
                 <div className="modal-repayloan-details">Name: {myStock[0].name}</div>
                 <div className="modal-repayloan-details">No. of shares: {myStock[0].shares}</div>
-                <div className="modal-repayloan-details">Date (year):{2000 + getHours(props.state.main.profile.start_time)}</div>
+                <div className="modal-repayloan-details">Date (year):{2000 + hours}</div>
               </div>
               <div>
-                <div>{amount} X {stock[0] ? (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares) : ""}(share price) = {stock[0] ? (Math.round(stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount * 100) / 100) : ""} SGD</div>
+                <div>{amount} X {stock[0] ? (stock[0].valuation[hours] / stock[0].total_shares) : ""}(share price) = {stock[0] ? (Math.round(stock[0].valuation[hours] / stock[0].total_shares * amount * 100) / 100) : ""} SGD</div>
                 <div
                   className="model-repayloan-button"
                   role="button"
-                  onClick={() => props.sellStock(amount, (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount), name, props.state.main.profile.bank_balance - (stock[0].valuation[getHours(props.state.main.profile.start_time)] / stock[0].total_shares * amount))}
+                  onClick={() => props.sellStock(amount, (stock[0].valuation[hours] / stock[0].total_shares * amount), name, props.state.main.profile.bank_balance - (stock[0].valuation[hours] / stock[0].total_shares * amount))}
                 >
                   Sell Stocks
                 </div>

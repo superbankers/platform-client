@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react'
+import { getHours } from '../common/helper'
 
 const Events = (props) => {
   return (
@@ -7,6 +8,7 @@ const Events = (props) => {
       <div className="list-header">Events</div>
       <div className="list-seg">
         {props.events.map((event, num) => {
+          if (num > getHours(props.profile.start_time)) return;
           return (
             <div className="list-seg-item">
               <img className="list-seg-item-pic" src={event.pic} />
