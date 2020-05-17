@@ -219,7 +219,7 @@ export default (state = initialState, action) => {
           bank_balance: action.data.bank_balance,
           loans: [
             ...state.profile.loans,
-            action.data.loans
+            action.data.loan
           ]
         }
       }

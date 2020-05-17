@@ -1,4 +1,14 @@
-# react-boilerplate
+# Razer Hackathon 2020
+
+### Overview
+<p align="center">
+  <img src="https://i.imgur.com/I7kF4vF.png" width="600" title="Razer Hackathon">
+</p>
+
+### Backend Integration
+* Backend (localhost:8085) -> ```https://github.com/superbankers/api-server.git```
+* Frontend (localhost:8080) -> ```https://github.com/superbankers/platform-client.git```
+* Database (MongoDB) -> Whitelist your IP
 
 ### Webpack Includes
 * **Basic React** (HTML, SCSS, React, Babel, Images)
@@ -14,3 +24,4 @@
 * ```npm run dev``` (localhost:8080)
 * ```npm run build``` (builds in dist folder)
 * ```npm run serve``` (serves dist folder at localhost: 8080)
+
