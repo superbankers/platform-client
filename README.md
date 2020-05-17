@@ -4,6 +4,11 @@
 <p align="center">
   <img src="https://i.imgur.com/I7kF4vF.png" width="600" title="Razer Hackathon">
 </p>
+<p align="center">
+  <img src="https://imgur.com/snoYE0v.png" width="200" title="Razer Hackathon">
+  <img src="https://imgur.com/EzLSIiF.png" width="200" title="Razer Hackathon">
+  <img src="https://imgur.com/oT5OUIo.png" width="200" title="Razer Hackathon">
+</p>
 
 ### Backend Integration
 * Backend (localhost:8085) -> ```https://github.com/superbankers/api-server.git```
