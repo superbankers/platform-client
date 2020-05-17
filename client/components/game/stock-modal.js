@@ -19,7 +19,6 @@ const customStyles = {
     background: 'rgb(197, 193, 255)'
   }
 };
-const data = [10,0,-2.5,540];
 const StockModal = (props) => {
   const [amount, setAmount] = useState(0);
   const { name } = props.state.main.modals.stock
